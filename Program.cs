@@ -19,15 +19,11 @@ int Get_Max_Profit(int[] stock_prices)
     {
         Console.WriteLine("i = {0}, stock_price[i] = {1}",i,stock_prices[i]);
         int node = stock_prices[i];
-        int localMax = stock_prices[i+1];
-        
-        
-
-    // find comparative max in remaining nodes
-        if(localMax - node > profit)
+        int lm = Get_Local_Max(stock_prices);
+        Console.WriteLine(lm);
+        if (lm - node > profit)
         {
-        // find diff of max and index
-            profit = localMax - node;
+            profit = lm - node;
         }
     }
         
@@ -35,3 +31,15 @@ int Get_Max_Profit(int[] stock_prices)
     return profit;
 }
 
+int Get_Local_Max(int[] sub)
+{
+    int max = sub[0];
+    for(int i = 1; i < sub.Length; ++i)
+    {
+        if (sub[i] > max)
+        {
+            max = sub[i];
+        }
+    }
+    return max;
+}
