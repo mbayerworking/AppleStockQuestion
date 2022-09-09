@@ -19,7 +19,8 @@ int Get_Max_Profit(int[] stock_prices)
     {
         Console.WriteLine("i = {0}, stock_price[i] = {1}",i,stock_prices[i]);
         int node = stock_prices[i];
-        int lm = Get_Local_Max(stock_prices);
+        //int lm = Get_Local_Max(stock_prices);
+        int lm = Get_Local_Max_Recursive(stock_prices);
         Console.WriteLine(lm);
         if (lm - node > profit)
         {
@@ -42,4 +43,26 @@ int Get_Local_Max(int[] sub)
         }
     }
     return max;
+}
+
+int Get_Local_Max_Recursive(int[] sub)
+{
+    if(sub.Length == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return Get_Local_Max_Recursive_Next(sub, sub[0]);
+    }
+}
+
+int Get_Local_Max_Recursive_Next(int[] sub, int max)
+{
+    if(sub.Length == 0)
+        return max;
+    if(sub[0] > max){
+        max = sub[0];
+    }
+    return Get_Local_Max_Recursive_Next(sub[1..], max);
 }
